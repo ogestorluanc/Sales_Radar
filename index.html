@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sales Radar — inteligência comercial B2B com IA</title>
+<meta name="description" content="O Sales Radar pesquisa seu prospecto, descobre necessidades e conecta cada oportunidade ao que você realmente vende.">
+<style>
+:root{
+  --bg:#f8fafc;--surface:#ffffff;--ink:#0f172a;--muted:#475569;--line:#e2e8f0;
+  --brand:#1d4ed8;--brand-soft:#dbeafe;--brand-ink:#1e3a8a;--ok:#047857;--ok-soft:#d1fae5;--warn:#92400e;--warn-soft:#fef3c7;--neutral-soft:#f1f5f9;
+  --ring:rgba(29,78,216,.22);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1220;--surface:#111a2e;--ink:#e8eefc;--muted:#9fb0cf;--line:#22304d;
+    --brand:#6ea0ff;--brand-soft:#16284d;--brand-ink:#bcd2ff;--ok:#6ee7b7;--ok-soft:#0f2e25;--warn:#fcd34d;--warn-soft:#33270a;--neutral-soft:#17223a;
+    --ring:rgba(110,160,255,.25);color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1220;--surface:#111a2e;--ink:#e8eefc;--muted:#9fb0cf;--line:#22304d;
+  --brand:#6ea0ff;--brand-soft:#16284d;--brand-ink:#bcd2ff;--ok:#6ee7b7;--ok-soft:#0f2e25;--warn:#fcd34d;--warn-soft:#33270a;--neutral-soft:#17223a;
+  --ring:rgba(110,160,255,.25);color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
+.logo svg{width:28px;height:28px}
+nav .links{display:flex;gap:18px;font-size:14px}
+nav .links a{color:var(--muted);text-decoration:none}
+nav .links a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding:48px 0 56px}
+h1{font-size:clamp(32px,5.4vw,52px);line-height:1.1;letter-spacing:-.025em;margin:0 0 18px;font-weight:750}
+.lead{font-size:18px;color:var(--muted);max-width:52ch;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0b1220}}
+:root[data-theme="dark"] .btn.primary{color:#0b1220}
+.radar{width:100%;max-width:340px;justify-self:center;color:var(--brand)}
+.radar .sweep{transform-origin:150px 150px;animation:spin 7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.radar .sweep{animation:none}}
+section{padding:40px 0;border-top:1px solid var(--line)}
+h2{font-size:26px;letter-spacing:-.015em;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 24px;max-width:62ch}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 14px 52px;position:relative;font-size:15px}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand-ink);display:grid;place-items:center;font-weight:700;font-size:13px}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:14px}
+.tags{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tag{border-radius:12px;padding:16px;border:1px solid var(--line);background:var(--surface)}
+.tag i{display:inline-block;font-style:normal;font-weight:650;font-size:13px;padding:3px 10px;border-radius:99px;margin-bottom:8px}
+.t1 i{background:var(--ok-soft);color:var(--ok)}.t2 i{background:var(--warn-soft);color:var(--warn)}.t3 i{background:var(--neutral-soft);color:var(--muted)}
+.tag p{margin:0;font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card h3{margin:0 0 4px;font-size:16px}.card p{margin:0;color:var(--muted);font-size:14px}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:0 0 16px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.note{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:14px 16px;font-size:14px}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:24px}.radar{max-width:220px;order:-1;justify-self:start}
+  .steps,.tags,.grid{grid-template-columns:1fr}nav .links{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Principal">
+    <div class="logo">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--brand)" aria-hidden="true"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="7"/><path d="M16 16 26 8" stroke-linecap="round"/><circle cx="16" cy="16" r="1.6" fill="currentColor"/></svg>
+      Sales Radar
+    </div>
+    <div class="links"><a href="#como-funciona">Como funciona</a><a href="#transparencia">Transparência</a><a href="#instalar">Instalação</a></div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Descubra o que vender para cada prospecto, antes da primeira conversa.</h1>
+      <p class="lead">Informe só o site da empresa. O Sales Radar pesquisa o negócio, identifica necessidades e conecta cada oportunidade aos produtos e serviços que você realmente comercializa.</p>
+      <div class="cta"><a class="btn primary" href="#instalar">Instalar o projeto</a><a class="btn" href="#como-funciona">Ver como funciona</a></div>
+    </div>
+    <svg class="radar" viewBox="0 0 300 300" fill="none" stroke="currentColor" aria-label="Ilustração de um radar" role="img">
+      <circle cx="150" cy="150" r="140" stroke-opacity=".25"/><circle cx="150" cy="150" r="98" stroke-opacity=".3"/><circle cx="150" cy="150" r="56" stroke-opacity=".4"/>
+      <path d="M150 10v280M10 150h280" stroke-opacity=".15"/>
+      <g class="sweep"><path d="M150 150 290 150A140 140 0 0 0 250 51Z" fill="currentColor" fill-opacity=".14" stroke="none"/><path d="M150 150h140" stroke-width="2"/></g>
+      <circle cx="212" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="104" cy="200" r="5" fill="currentColor" stroke="none" fill-opacity=".7"/><circle cx="196" cy="214" r="4" fill="currentColor" stroke="none" fill-opacity=".45"/>
+    </svg>
+  </header>
+
+  <section id="como-funciona">
+    <h2>Um consultor comercial que pesquisa por você</h2>
+    <p class="sub">A análise roda em etapas independentes. Cada uma salva seu resultado, e, se alguma falhar, você retoma de onde parou.</p>
+    <ol class="steps">
+      <li><b>Conhecer o vendedor</b><span>Perfil e catálogo ativo que você cadastrou.</span></li>
+      <li><b>Pesquisar o prospecto</b><span>Site completo e fontes públicas, com as fontes guardadas.</span></li>
+      <li><b>Interpretar o negócio</b><span>O que a empresa faz e como ganha dinheiro.</span></li>
+      <li><b>Diagnosticar necessidades</b><span>Sinais concretos e hipóteses do modelo de negócio.</span></li>
+      <li><b>Cruzar com o catálogo</b><span>Só ofertas que existem no seu catálogo.</span></li>
+      <li><b>Classificar</b><span>Demanda identificada, provável ou potencial.</span></li>
+      <li><b>Priorizar</b><span>Aderência alta, média ou baixa, com critérios visíveis.</span></li>
+      <li><b>Estratégia e mensagens</b><span>Abordagem específica, e-mail e WhatsApp editáveis.</span></li>
+    </ol>
+  </section>
+
+  <section id="transparencia">
+    <h2>Compatibilidade não é demanda</h2>
+    <p class="sub">O sistema separa o que foi encontrado do que foi deduzido, e as regras são impostas pelo código, não apenas pelo prompt.</p>
+    <div class="tags">
+      <div class="tag t1"><i>Demanda identificada</i><p>Há evidência concreta, com trecho e fonte verificável.</p></div>
+      <div class="tag t2"><i>Demanda provável</i><p>Há indícios consistentes, ainda sem confirmação direta.</p></div>
+      <div class="tag t3"><i>Oportunidade potencial</i><p>O negócio é compatível com sua oferta, sem evidência de demanda.</p></div>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <div class="card"><h3>Fatos e inferências separados</h3><p>Cada resultado indica a fonte ou aparece marcado como inferência da IA.</p></div>
+      <div class="card"><h3>Limitações explícitas</h3><p>Site fora do ar ou pouco conteúdo? A análise avisa e nunca inventa dados.</p></div>
+      <div class="card"><h3>Você no controle</h3><p>Sugestões da IA são revisadas antes de salvar. Nenhuma mensagem é enviada sozinha.</p></div>
+      <div class="card"><h3>Seguro por padrão</h3><p>Dados isolados por usuário, proteção contra SSRF e conteúdo da web tratado como dado não confiável.</p></div>
+    </div>
+  </section>
+
+  <section id="instalar">
+    <h2>Instalação</h2>
+    <p class="sub">Next.js, FastAPI e PostgreSQL, com autenticação via Supabase. Precisa de Docker e de chaves de API (um provedor de IA e, opcionalmente, de busca).</p>
+<pre><code>cp .env.example .env     # preencha Supabase, IA e busca
+docker compose up --build
+# app: http://localhost:3000
+# API: http://localhost:8000/docs</code></pre>
+    <p class="note">Esta página é apenas a apresentação do projeto. O aplicativo precisa de backend e banco de dados, por isso não funciona só no GitHub Pages. Para colocá-lo no ar, hospede-o em um serviço como Render ou Railway.</p>
+  </section>
+
+  <footer><span>© Sales Radar</span><span>Inteligência comercial B2B com IA</span></footer>
+</div>
+</body>
+</html>
